@@ -1,6 +1,6 @@
 package com.example.recipe2.recipe.requestdto;
 
-import lombok.Getter;
+
 
 
 public class RecipeRequestDto {
