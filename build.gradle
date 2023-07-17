@@ -23,8 +23,8 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j'
     compileOnly 'org.projectlombok:lombok'
 
-
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.json:json:20230227'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     // JWT
     compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
