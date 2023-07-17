@@ -1,7 +1,7 @@
 package com.example.recipe2.recipe.responsedto;
 
 import com.example.recipe2.recipe.Recipe;
-import lombok.Getter;
+
 
 
 

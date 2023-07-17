@@ -9,8 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
-@Getter
 public class Recipe {
 
     @Id
@@ -30,4 +28,27 @@ public class Recipe {
         this.cookingMethod = recipeRequestDto.getCookingMethod();
     }
 
+    public Recipe() {
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public String getIngredient() {
+        return ingredient;
+    }
+
+    public String getLinkImage() {
+        return linkImage;
+    }
+
+    public String getCookingMethod() {
+        return cookingMethod;
+    }
 }
