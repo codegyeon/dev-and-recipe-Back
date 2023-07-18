@@ -1,8 +1,12 @@
 package com.example.recipe2.user;
 
+import com.example.recipe2.recipe.Recipe;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 //@Getter
@@ -28,21 +32,15 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
+    @OneToMany(mappedBy = "user")
+    private List<Recipe> recipeList = new ArrayList<>();
+
     public User(String email, String password, String nickname, UserRoleEnum role) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.role = role;
     }
-
-    public User(String email, String password, String nickname, String method) {
-        this.email = email;
-        this.password = password;
-        this.nickname = nickname;
-        this.method = method;
-        this.role = role;
-    }
-
     public User() {
         
     }
@@ -60,5 +58,9 @@ public class User {
     }
     public String getNickname() {
         return nickname;
+    }
+
+    public List<Recipe> getRecipeList() {
+        return recipeList;
     }
 }
