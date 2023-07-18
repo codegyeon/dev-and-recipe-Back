@@ -4,24 +4,30 @@ package com.example.recipe2.recipe.requestdto;
 
 
 public class RecipeRequestDto {
-    private String foodName;
+    private String title;
+    private String subtitle;
     private String ingredient;
-    private String linkImage;
-    private String cookingMethod;
+    private String tip;
+    private String category;
 
-    public String getFoodName() {
-        return foodName;
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
     }
 
     public String getIngredient() {
         return ingredient;
     }
 
-    public String getLinkImage() {
-        return linkImage;
+
+    public String getTip() {
+        return tip;
     }
 
-    public String getCookingMethod() {
-        return cookingMethod;
+    public String getCategory() {
+        return category;
     }
 }
