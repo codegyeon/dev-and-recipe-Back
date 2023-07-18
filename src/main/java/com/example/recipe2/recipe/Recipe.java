@@ -1,10 +1,7 @@
 package com.example.recipe2.recipe;
 
 import com.example.recipe2.recipe.requestdto.RecipeRequestDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +14,12 @@ public class Recipe {
 
     private String foodName;
     private String ingredient;
-    private String linkImage;
+
+    @Column(length = 150)
+    private String fileName;
+
+    @Column(length = 300)
+    private String filePath;
     private String cookingMethod;
 
 

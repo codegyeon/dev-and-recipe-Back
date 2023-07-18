@@ -22,9 +22,24 @@ public class RecipeController {
         return new ResponseEntity<>(recipeService.getRecipeList(), HttpStatus.OK);
     }
 
+    //게시글 작성
     @PostMapping("")
     public ResponseEntity createRecipe(@RequestBody RecipeRequestDto recipeRequestDto){
         recipeService.createRecipe(recipeRequestDto);
         return new ResponseEntity("success",HttpStatus.OK);
     }
+
+    // 상세 레시피 조회
+    @GetMapping("/{recipeId}")
+    public ResponseEntity getRecipe(@RequestParam Long recipeId){
+        return new ResponseEntity(recipeService.getRecipe(recipeId),HttpStatus.OK);
+    }
+
+    @PutMapping("/{recipeId}")
+
+
+
+    @DeleteMapping("/{recipeId}")
+    public ResponseEntity deleteRecipe(@RequestParam Long recipeId)
+
 }
