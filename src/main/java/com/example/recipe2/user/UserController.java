@@ -37,10 +37,10 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity signup(@Valid @RequestBody SignupRequestDto signupRequestDto, BindingResult bindingResult) {
-        logger.error(signupRequestDto.getEmail());
-        logger.error(signupRequestDto.getNickname());
-        logger.error(signupRequestDto.getPassword());
         logger.error("회원가입 시도");
+        logger.error("이메일 : "+signupRequestDto.getEmail());
+        logger.error("닉네임 : "+signupRequestDto.getNickname());
+        logger.error("비밀번호 : " + signupRequestDto.getPassword());
         // Validation 예외처리
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         if (fieldErrors.size() > 0) {

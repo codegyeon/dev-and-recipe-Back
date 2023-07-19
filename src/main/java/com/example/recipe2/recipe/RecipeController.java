@@ -5,6 +5,7 @@ import com.example.recipe2.security.UserDetailsImpl;
 import com.example.recipe2.user.UserController;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -46,9 +47,12 @@ public class RecipeController {
             @RequestPart(name = "tip") String tip,
             @RequestPart(name = "category") String category,
             @RequestPart(name = "content") String content,
-            @RequestPart(name = "file") MultipartFile file
+            @RequestPart(name = "file", required = false) MultipartFile file,
+            HttpServletRequest httpServletRequest
     ) {
         logger.error(content);
+        logger.error("전체 게시글 조회 시도");
+
         try{
             recipeService.createRecipe(userDetails.getUser(),
                     new RecipeRequestDto(title,subtitle,ingredient, tip,  category),
@@ -94,6 +98,7 @@ public class RecipeController {
 
     @DeleteMapping("/{recipeId}")
     public ResponseEntity deleteRecipe(@AuthenticationPrincipal UserDetailsImpl userDetails,@PathVariable Long recipeId){
+        logger.error("게시글 삭제 시도");
         try{
             recipeService.deleteRecipe(userDetails.getUser().getNickname(),recipeId);
         }catch (Exception e){
