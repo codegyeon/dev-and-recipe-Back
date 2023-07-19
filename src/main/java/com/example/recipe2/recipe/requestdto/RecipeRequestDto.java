@@ -30,4 +30,15 @@ public class RecipeRequestDto {
     public String getCategory() {
         return category;
     }
+
+    public RecipeRequestDto() {
+    }
+
+    public RecipeRequestDto(String title, String subtitle, String ingredient, String tip, String category) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.ingredient = ingredient;
+        this.tip = tip;
+        this.category = category;
+    }
 }

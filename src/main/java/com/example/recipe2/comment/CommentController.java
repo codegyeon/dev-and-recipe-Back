@@ -22,19 +22,34 @@ public class CommentController {
     }
 
     @PostMapping("/{recipeId}")
-    public CommentResponseDto createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ResponseEntity<?> createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    CommentResponseDto commentResponseDto;
     User user = userDetails.getUser();
-    return commentService.createComment(commentRequestDto, user);
+        try{
+            commentResponseDto = commentService.createComment(commentRequestDto, user);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ResultResponseEntity(e.getMessage()) ,HttpStatus.UNAUTHORIZED);
+        }
+
+        return new ResponseEntity<>(commentResponseDto,HttpStatus.OK);
     }
 
+    //댓글 수정
     @PutMapping("/{recipeId}/{commentId}")
-    public CommentResponseDto updateComment(@PathVariable Long id,@RequestBody CommentRequestDto commentRequestDto,@AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ResponseEntity<?> updateComment(@PathVariable Long id,@RequestBody CommentRequestDto commentRequestDto,@AuthenticationPrincipal UserDetailsImpl userDetails){
+        CommentResponseDto commentResponseDto;
         User user = userDetails.getUser();
-        return commentService.updateComment(id, commentRequestDto,user);
+        try{
+            commentResponseDto = commentService.updateComment(id, commentRequestDto,user);
+        }catch (Exception e){
+            return  new ResponseEntity<>(new ResultResponseEntity(e.getMessage()), HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(commentResponseDto,HttpStatus.OK);
     }
 
+    // 댓글 삭제
     @DeleteMapping("/{recipeId}/{commentId}")
-    public ResponseEntity deleteComment(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ResponseEntity<?> deleteComment(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
         User user = userDetails.getUser();
         try {
             commentService.deleteComment(id,user);

@@ -1,8 +1,10 @@
 package com.example.recipe2.recipe.responsedto;
 
 import com.example.recipe2.recipe.Recipe;
+import com.example.recipe2.recipe.content.responsedto.ContentResponseDto;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RecipeResponseDto {
@@ -14,6 +16,7 @@ public class RecipeResponseDto {
     private String url;
     private String tip;
     private String category;
+    private List<ContentResponseDto> contentResponseDtoList;
 
     public Long getId() {
         return id;
@@ -47,6 +50,10 @@ public class RecipeResponseDto {
         return category;
     }
 
+    public List<ContentResponseDto> getContentResponseDtoList() {
+        return contentResponseDtoList;
+    }
+
     public RecipeResponseDto(Recipe recipe) {
         this.id = recipe.getId();
         this.nickname = recipe.getUser().getNickname();
@@ -56,5 +63,6 @@ public class RecipeResponseDto {
         this.url = recipe.getUrl();
         this.tip = recipe.getTip();
         this.category =recipe.getCategory();
+        this.contentResponseDtoList = recipe.getContentList().stream().map(ContentResponseDto::new).toList();
     }
 }

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 //@Getter
 //@Setter
 //@NoArgsConstructor
-public class Comment {
+public class Comment extends Timestamped{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +27,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn
     private Recipe recipe;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
 
 
     public Comment(CommentRequestDto commentRequestDto, User user, Recipe recipe) {
@@ -57,13 +55,6 @@ public class Comment {
     }
     public Recipe getRecipe() {
         return recipe;
-    }
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getModifiedAt() {
-        return modifiedAt;
     }
 
 }

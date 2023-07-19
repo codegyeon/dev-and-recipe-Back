@@ -30,7 +30,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Recipe> recipeList = new ArrayList<>();
 
     public User(String email, String password, String nickname, UserRoleEnum role) {

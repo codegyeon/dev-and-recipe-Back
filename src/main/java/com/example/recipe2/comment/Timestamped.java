@@ -16,18 +16,18 @@ public abstract class Timestamped {
     @CreatedDate
     @Column(updatable = false) // 수정 불가능
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime createdAt;
+    private LocalDateTime created_At;
 
     @LastModifiedDate //조회한것을 변경시킬때마다 저장
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime modifiedAt;
+    private LocalDateTime modified_At;
 
     public LocalDateTime getCreatedAt() {
-        return createdAt;
+        return created_At;
     }
 
     public LocalDateTime getModifiedAt() {
-        return modifiedAt;
+        return modified_At;
     }
 }
