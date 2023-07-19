@@ -1,16 +1,17 @@
 package com.example.recipe2.user;
 
+import com.example.recipe2.security.UserDetailsImpl;
+import com.example.recipe2.security.dto.EmailNicknameDto;
 import com.example.recipe2.user.requestdto.SignupRequestDto;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 //@Slf4j
@@ -45,6 +46,17 @@ public class UserController {
         }
 
         return new ResponseEntity<>(new ResultResponseEntity("회원 가입 성공"), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/token")
+    public ResponseEntity getToken(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return new ResponseEntity<>(
+                new EmailNicknameDto(userDetails.getUser().getEmail(),userDetails.getUser().getNickname()),
+                HttpStatus.OK
+        );
+
+
     }
 
 
