@@ -82,4 +82,5 @@ public class Recipe {
     public String getCategory() {
         return category;
     }
+
 }

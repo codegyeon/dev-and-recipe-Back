@@ -89,9 +89,14 @@ public class WebSecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
-        config.setAllowedOrigins(List.of("https://dev-recipe-front.vercel.app"));
+//        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.addAllowedOrigin("https://dev-recipe-front.vercel.app");
+        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("DELETE");
+        config.addAllowedMethod("PATCH");
         config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("*"));
 
