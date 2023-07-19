@@ -1,8 +1,10 @@
 package com.example.recipe2.user;
 
+import com.example.recipe2.jwt.JwtUtil;
 import com.example.recipe2.security.UserDetailsImpl;
 import com.example.recipe2.security.dto.EmailNicknameDto;
 import com.example.recipe2.user.requestdto.SignupRequestDto;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

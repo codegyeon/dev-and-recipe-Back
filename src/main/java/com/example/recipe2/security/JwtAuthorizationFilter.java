@@ -6,7 +6,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -17,9 +18,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Slf4j(topic = "JWT 검증 및 인가")
+
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthorizationFilter.class);
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
 
@@ -39,7 +41,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             String tokenValue = jwtUtil.substringToken(token);
 
             if (!jwtUtil.validateToken(tokenValue)) {
-//                log.error("Token Error");
                 return;
             }
 
@@ -48,11 +49,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             try {
                 setAuthentication(info.getSubject());
             } catch (Exception e) {
-//                log.error(e.getMessage());
+                logger.error("인증오류!!!!");
                 return;
             }
         }
-
+        logger.error("토큰이 존재하지 않습니다.");
         filterChain.doFilter(req, res);
     }
 
