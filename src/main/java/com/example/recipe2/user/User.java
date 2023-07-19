@@ -1,5 +1,6 @@
 package com.example.recipe2.user;
 
+import com.example.recipe2.comment.Comment;
 import com.example.recipe2.recipe.Recipe;
 import jakarta.persistence.*;
 
@@ -32,6 +33,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Recipe> recipeList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "comment" , cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Comment> commentList = new ArrayList<>();
 
     public User(String email, String password, String nickname, UserRoleEnum role) {
         this.email = email;
