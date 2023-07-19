@@ -9,7 +9,7 @@ import java.util.List;
 
 public class RecipeResponseDto {
     private Long id;
-    private String nickname;
+    private String email;
     private String title;
     private String subtitle;
     private String ingredient;
@@ -22,8 +22,8 @@ public class RecipeResponseDto {
         return id;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getEmail() {
+        return email;
     }
 
     public String getTitle() {
@@ -56,7 +56,7 @@ public class RecipeResponseDto {
 
     public RecipeResponseDto(Recipe recipe) {
         this.id = recipe.getId();
-        this.nickname = recipe.getUser().getNickname();
+        this.email = recipe.getUser().getEmail();
         this.title = recipe.getTitle();
         this.subtitle = recipe.getSubtitle();
         this.ingredient = recipe.getIngredient();
