@@ -67,9 +67,17 @@ public class JwtUtil {
 
             Cookie cookie = new Cookie(AUTHORIZATION_HEADER, token); // Name-Value
             cookie.setPath("/");
-
             // Response 객체에 Cookie 추가
             res.addCookie(cookie);
+
+            // Add SameSite=None attribute to Set-Cookie header
+            String headerValue = res.getHeader("Set-Cookie");
+            if (headerValue != null) {
+                headerValue += "; SameSite=None; Secure";
+                res.setHeader("Set-Cookie", headerValue);
+            }
+
+
         } catch (UnsupportedEncodingException e) {
             logger.error(e.getMessage());
         }
