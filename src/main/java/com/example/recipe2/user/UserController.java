@@ -37,7 +37,10 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity signup(@Valid @RequestBody SignupRequestDto signupRequestDto, BindingResult bindingResult) {
-        logger.error("로그인시도");
+        logger.error(signupRequestDto.getEmail());
+        logger.error(signupRequestDto.getNickname());
+        logger.error(signupRequestDto.getPassword());
+        logger.error("회원가입 시도");
         // Validation 예외처리
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         if (fieldErrors.size() > 0) {
