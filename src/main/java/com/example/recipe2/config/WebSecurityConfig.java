@@ -88,7 +88,7 @@ public class WebSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowCredentials(true);
+        config.setAllowCredentials(false);
 //        config.setAllowedOrigins(List.of("http://localhost:3000"));
         config.addAllowedOrigin("https://dev-recipe-front.vercel.app");
         config.addAllowedOrigin("http://localhost:3000");
