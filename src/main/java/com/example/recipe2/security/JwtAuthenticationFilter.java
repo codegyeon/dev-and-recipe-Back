@@ -47,9 +47,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
         String email = ((UserDetailsImpl) authResult.getPrincipal()).getUsername();
         UserRoleEnum role = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getRole();
+        String nickname = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getNickname();
 
         String token = jwtUtil.createToken(email,role);
         jwtUtil.addJwtToCookie(token,response);
+        
+
+        // Send user details to the frontend
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(email);
+        response.getWriter().write(nickname);
 
     }
 
