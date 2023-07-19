@@ -1,11 +1,11 @@
 package com.example.recipe2.security;
 
 import com.example.recipe2.jwt.JwtUtil;
+import com.example.recipe2.security.dto.EmailNicknameDto;
 import com.example.recipe2.user.UserRoleEnum;
 import com.example.recipe2.user.requestdto.LoginRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -53,15 +53,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         jwtUtil.addJwtToCookie(token,response);
         
         ObjectMapper objectMapper = new ObjectMapper();
-        String userJson = objectMapper.writeValueAsString(authResult.getPrincipal());
+        String userJson = objectMapper.writeValueAsString(new EmailNicknameDto(email,nickname));
         
         // Send user details to the frontend
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         response.getWriter().write(userJson);
-        response.getWriter().write(email);
-        response.getWriter().write(nickname);
+
 
     }
 
