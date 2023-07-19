@@ -52,10 +52,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = jwtUtil.createToken(email,role);
         jwtUtil.addJwtToCookie(token,response);
         
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        String userJson = objectMapper.writeValueAsString(authResult.getPrincipal());
+        
         // Send user details to the frontend
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+
+        response.getWriter().write(userJson);
         response.getWriter().write(email);
         response.getWriter().write(nickname);
 
