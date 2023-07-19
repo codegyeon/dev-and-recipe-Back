@@ -91,7 +91,7 @@ public class WebSecurityConfig {
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedOrigin("https://dev-recipe-front.vercel.app");
-        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedOrigin("https://test-front-beige.vercel.app/");
         config.addAllowedMethod("GET");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("PUT");
