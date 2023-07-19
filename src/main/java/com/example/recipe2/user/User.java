@@ -34,7 +34,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Recipe> recipeList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "comment" , cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Comment> commentList = new ArrayList<>();
 
     public User(String email, String password, String nickname, UserRoleEnum role) {
