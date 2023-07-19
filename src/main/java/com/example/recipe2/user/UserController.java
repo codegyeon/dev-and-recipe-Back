@@ -31,6 +31,8 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity signup(@Valid @RequestBody SignupRequestDto signupRequestDto, BindingResult bindingResult) {
+        System.out.println("signupRequestDto.getEmail() = " + signupRequestDto.getEmail());
+        System.out.println("signupRequestDto.getNickname() = " + signupRequestDto.getNickname());
         // Validation 예외처리
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         if (fieldErrors.size() > 0) {
