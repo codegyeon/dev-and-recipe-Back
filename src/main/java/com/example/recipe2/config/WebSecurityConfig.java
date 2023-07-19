@@ -59,7 +59,7 @@ public class WebSecurityConfig {
         // CSRF 설정
         http.csrf((csrf) -> csrf.disable());
 
-
+        http.cors();
 
 
         // 기본 설정인 Session 방식은 사용하지 않고 JWT 방식을 사용하기 위한 설정
@@ -88,8 +88,8 @@ public class WebSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowCredentials(false);
-//        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedOrigin("https://dev-recipe-front.vercel.app");
         config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedMethod("GET");
