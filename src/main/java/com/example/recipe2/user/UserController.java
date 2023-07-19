@@ -1,6 +1,7 @@
 package com.example.recipe2.user;
 
 import com.example.recipe2.jwt.JwtUtil;
+import com.example.recipe2.security.JwtAuthorizationFilter;
 import com.example.recipe2.security.UserDetailsImpl;
 import com.example.recipe2.security.dto.EmailNicknameDto;
 import com.example.recipe2.user.requestdto.SignupRequestDto;
@@ -8,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,7 +25,7 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserController {
 
-
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
 //    private final KakaoService kakaoService;
 
@@ -34,8 +37,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity signup(@Valid @RequestBody SignupRequestDto signupRequestDto, BindingResult bindingResult) {
-        System.out.println("signupRequestDto.getEmail() = " + signupRequestDto.getEmail());
-        System.out.println("signupRequestDto.getNickname() = " + signupRequestDto.getNickname());
+        logger.error("로그인시도");
         // Validation 예외처리
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         if (fieldErrors.size() > 0) {
@@ -53,6 +55,7 @@ public class UserController {
 
     @GetMapping("/token")
     public ResponseEntity getToken(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        logger.error("토큰인증 성공");
         return new ResponseEntity<>(
                 new EmailNicknameDto(userDetails.getUser().getEmail(),userDetails.getUser().getNickname()),
                 HttpStatus.OK
