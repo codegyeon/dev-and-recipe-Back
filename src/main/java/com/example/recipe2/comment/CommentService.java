@@ -29,7 +29,7 @@ public class CommentService {
 
     // 댓글생성
     public CommentResponseDto createComment(CommentRequestDto commentRequestDto, User user) {
-        Recipe recipe = recipeRepository.findById(Long.parseLong(commentRequestDto.getRecipId())).orElseThrow(
+        Recipe recipe = recipeRepository.findById(commentRequestDto.getRecipId()).orElseThrow(
                 ()->new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
         Comment comment = new Comment(commentRequestDto, user,recipe);
 

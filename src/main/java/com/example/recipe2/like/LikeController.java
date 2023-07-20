@@ -21,6 +21,8 @@ public class LikeController {
         this.likeService = likeService;
     }
 
+
+
 // 어떤 게시글인지? 어떤 유저인지?
     @PostMapping("")
     public ResponseEntity<Like> likeRecipe(@RequestBody LikeRequestDto likeRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
