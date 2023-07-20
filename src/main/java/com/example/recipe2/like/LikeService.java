@@ -19,12 +19,19 @@ public class LikeService {
         this.recipeRepository = recipeRepository;
     }
     public void likeRecipe(LikeRequestDto likeRequestDto,User user){
-//    Optional<Like> like = likeRepository.findByUserIdAndRecipeId(likeRequestDto.getRecipeId(), user.getId())
-//                .orElseThrow(() -> new IllegalArgumentException("좋아요를 체크하지 않으셨습니다."));
+    Optional<Like> like = likeRepository.findByUserIdAndRecipeId(likeRequestDto.getRecipeId(), user.getId());
 
         if(!user.getId().equals(likeRequestDto.getRecipeId())) {
             throw new IllegalArgumentException("변경할 수 없습니다.");
         }
+
+        if(like.isPresent()){
+            likeRepository.delete(like.get());
+        } else{
+            Like newLike = new Like(user, recipeRepository.findById(likeRequestDto.getRecipeId()));
+            likeRepository.save(newLike);
+        }
+
 
 
 

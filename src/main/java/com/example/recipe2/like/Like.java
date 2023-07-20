@@ -5,6 +5,8 @@ import com.example.recipe2.recipe.Recipe;
 import com.example.recipe2.user.User;
 import jakarta.persistence.*;
 
+import java.util.Optional;
+
 @Entity
 @Table(name = "likes")
 public class Like {
@@ -29,4 +31,6 @@ public class Like {
     }
 
 
+    public Like(User user, Optional<Recipe> byId) {
+    }
 }
