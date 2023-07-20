@@ -18,27 +18,26 @@ public class Comment extends Timestamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String content;
+    private String comment;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
 
     public Comment(CommentRequestDto commentRequestDto, User user, Recipe recipe) {
-        this.content = commentRequestDto.getContent();
+        this.comment = commentRequestDto.getComment();
         this.user = user;
         this.recipe = recipe;
     }
 
 
-    public void updateComment(CommentRequestDto commentRequestDto, User user) {
-        this.content = commentRequestDto.getContent();
-        this.user = user;
+    public void updateComment(CommentRequestDto commentRequestDto) {
+        this.comment = commentRequestDto.getComment();
     }
 
 
@@ -47,9 +46,11 @@ public class Comment extends Timestamped{
     public Long getId() {
         return id;
     }
-    public String getContent() {
-        return content;
+
+    public String getComment() {
+        return comment;
     }
+
     public User getUser() {
         return user;
     }

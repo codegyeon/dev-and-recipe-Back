@@ -8,15 +8,14 @@ public class CommentRequestDto {
 
     private Long recipId;
 
-    private String content;
+    private String comment;
 
 
     public Long getRecipId() {
         return recipId;
     }
 
-    public String getContent() {
-        return content;
+    public String getComment() {
+        return comment;
     }
-
 }

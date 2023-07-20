@@ -41,7 +41,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             String tokenValue = jwtUtil.substringToken(token);
 
             if (!jwtUtil.validateToken(tokenValue)) {
-                return;
+                res.sendError(403,"토큰이 유효하지 않습니다.");
             }
 
             Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
@@ -50,7 +50,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 setAuthentication(info.getSubject());
             } catch (Exception e) {
                 logger.error("인증오류!!!!");
-                return;
+                res.sendError(403,"토큰이 유효하지 않습니다.");
             }
         }
         logger.error("토큰이 존재하지 않습니다.");

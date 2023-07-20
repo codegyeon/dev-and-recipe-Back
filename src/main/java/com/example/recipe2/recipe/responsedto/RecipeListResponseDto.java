@@ -4,11 +4,8 @@ import com.example.recipe2.recipe.Recipe;
 import com.example.recipe2.recipe.content.responsedto.ContentResponseDto;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-
-public class RecipeResponseDto {
+public class RecipeListResponseDto {
     private Long id;
     private String email;
     private String title;
@@ -19,7 +16,6 @@ public class RecipeResponseDto {
     private String category;
     private LocalDateTime created_At;
     private LocalDateTime modified_At;
-    private List<ContentResponseDto> contentResponseDtoList;
 
     public LocalDateTime getCreated_At() {
         return created_At;
@@ -60,12 +56,7 @@ public class RecipeResponseDto {
     public String getCategory() {
         return category;
     }
-
-    public List<ContentResponseDto> getContentResponseDtoList() {
-        return contentResponseDtoList;
-    }
-
-    public RecipeResponseDto(Recipe recipe) {
+    public RecipeListResponseDto(Recipe recipe) {
         this.id = recipe.getId();
         this.email = recipe.getUser().getEmail();
         this.title = recipe.getTitle();
@@ -76,6 +67,5 @@ public class RecipeResponseDto {
         this.category =recipe.getCategory();
         this.created_At = recipe.getCreatedAt();
         this.modified_At = recipe.getModifiedAt();
-        this.contentResponseDtoList = recipe.getContentList().stream().map(ContentResponseDto::new).toList();
     }
 }

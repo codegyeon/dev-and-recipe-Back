@@ -44,13 +44,8 @@ public class Recipe extends Timestamped {
     @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Content> contentList = new ArrayList<>();
 
-    public void addContentList(Content content) {
-        this.contentList.add(content);
-        content.setRecipe(this); // 외래 키(연관 관계) 설정
-    }
 
-    public User getUser() {
-        return user;
+    public Recipe() {
     }
 
     public Recipe(RecipeRequestDto recipeRequestDto, String url, User user) {
@@ -63,8 +58,8 @@ public class Recipe extends Timestamped {
         this.user = user;
     }
 
-    public Recipe() {
-
+    public User getUser() {
+        return user;
     }
 
     public Long getId() {
@@ -107,5 +102,19 @@ public class Recipe extends Timestamped {
         this.tip = recipeRequestDto.getTip();
         this.category = recipeRequestDto.getCategory();
         this.user = user;
+    }
+
+    public void update(RecipeRequestDto recipeRequestDto, String url) {
+        this.title = recipeRequestDto.getTitle();
+        this.subtitle = recipeRequestDto.getSubtitle();
+        this.ingredient = recipeRequestDto.getIngredient();
+        this.url = url;
+        this.tip = recipeRequestDto.getTip();
+        this.category = recipeRequestDto.getCategory();
+    }
+
+    public void addContentList(Content content) {
+        this.contentList.add(content);
+        content.setRecipe(this); // 외래 키(연관 관계) 설정
     }
 }

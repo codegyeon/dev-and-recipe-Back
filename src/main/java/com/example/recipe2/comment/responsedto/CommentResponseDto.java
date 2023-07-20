@@ -11,14 +11,14 @@ import java.time.LocalDateTime;
 public class CommentResponseDto {
 
     private Long id;
-    private String content;
+    private String comment;
     private String nickname;
     private LocalDateTime created_At;
     private LocalDateTime modified_At;
 
     public CommentResponseDto(Comment comment) {
         this.id = comment.getId();
-        this.content = comment.getContent();
+        this.comment = comment.getComment();
         this.nickname = comment.getUser().getNickname();
         this.created_At = comment.getCreatedAt();
         this.modified_At = comment.getModifiedAt();
@@ -29,8 +29,8 @@ public class CommentResponseDto {
         return id;
     }
 
-    public String getContent() {
-        return content;
+    public String getComment() {
+        return comment;
     }
 
     public String getNickname() {

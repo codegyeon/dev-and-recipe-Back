@@ -3,6 +3,7 @@ package com.example.recipe2.recipe;
 import com.example.recipe2.recipe.content.Content;
 import com.example.recipe2.recipe.content.ContentRepository;
 import com.example.recipe2.recipe.requestdto.RecipeRequestDto;
+import com.example.recipe2.recipe.responsedto.RecipeListResponseDto;
 import com.example.recipe2.recipe.responsedto.RecipeResponseDto;
 import com.example.recipe2.s3.S3Upload;
 import com.example.recipe2.user.User;
@@ -33,8 +34,8 @@ public class RecipeService {
     }
 
     //전체 게시글 조회
-    public List<RecipeResponseDto> getRecipeList() {
-        return recipeRepository.findAll().stream().map(RecipeResponseDto::new).toList();
+    public List<RecipeListResponseDto> getRecipeList() {
+        return recipeRepository.findAll().stream().map(RecipeListResponseDto::new).toList();
     }
 
     @Transactional
@@ -86,24 +87,21 @@ public class RecipeService {
 
         String url = s3Upload.upload(file);
 
-
+        // 레시피의 조리방법 비우기
+        recipe.getContentList().clear();
 
         // 배열 형태 content 하나씩 잘라서 저장.
         ObjectMapper objectMapper = new ObjectMapper();
         List<String> strings = objectMapper.readValue(content, new TypeReference<List<String>>() {});
 
+        // 조리 방법 비운거 다시 채우기
         for (String content1 : strings) {
             Content content2 = new Content(content1);
             recipe.addContentList(content2);
             contentRepository.save(content2);
         }
 
-//        recipe.save(recipeRequestDto,url,user);
-
-        recipeRepository.save(recipe);
-
-
-//        return new RecipeResponseDto(recipe);
+        recipe.update(recipeRequestDto,url);
 
     }
 

@@ -47,11 +47,10 @@ public class RecipeController {
             @RequestPart(name = "tip") String tip,
             @RequestPart(name = "category") String category,
             @RequestPart(name = "content") String content,
-            @RequestPart(name = "file", required = false) MultipartFile file,
-            HttpServletRequest httpServletRequest
+            @RequestPart(name = "file", required = false) MultipartFile file
     ) {
         logger.error(content);
-        logger.error("전체 게시글 조회 시도");
+        logger.error("게시글 작성 시도");
 
         try{
             recipeService.createRecipe(userDetails.getUser(),
@@ -81,7 +80,7 @@ public class RecipeController {
             @RequestPart(name = "tip") String tip,
             @RequestPart(name = "category") String category,
             @RequestPart(name = "content") String content,
-            @RequestPart(name = "file") MultipartFile file
+            @RequestPart(name = "file", required = false) MultipartFile file
     ){
         logger.error("게시글 수정 시도");
         try {
