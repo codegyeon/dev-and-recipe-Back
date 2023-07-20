@@ -38,6 +38,8 @@ public class CommentController {
     @PostMapping("")
     public ResponseEntity<Comment> createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         logger.error("댓글 생성 시도");
+        logger.error(commentRequestDto.getRecipId());
+        logger.error(commentRequestDto.getComment());
         CommentResponseDto commentResponseDto;
         try{
             commentResponseDto = commentService.createComment(commentRequestDto, userDetails.getUser());
