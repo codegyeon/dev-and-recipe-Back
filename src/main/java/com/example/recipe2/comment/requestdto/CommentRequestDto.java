@@ -6,13 +6,13 @@ import lombok.Getter;
 public class CommentRequestDto {
 
 
-    private Long recipId;
+    private String recipeId;
 
     private String comment;
 
 
-    public String getRecipId() {
-        return recipId;
+    public String getRecipeId() {
+        return recipeId;
     }
 
     public String getComment() {
