@@ -11,7 +11,7 @@ public class CommentRequestDto {
     private String comment;
 
 
-    public Long getRecipId() {
+    public String getRecipId() {
         return recipId;
     }
 
